@@ -1,0 +1,26 @@
+{
+  "name": "blogging",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Real-World-System-Design/Blogging_Node_PG.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Real-World-System-Design/Blogging_Node_PG/issues"
+  },
+  "homepage": "https://github.com/Real-World-System-Design/Blogging_Node_PG#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
+    "typeorm": "^0.2.32"
+  }
+}
