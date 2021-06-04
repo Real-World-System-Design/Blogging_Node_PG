@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
+import { User } from "./User";
 
 @Entity("articles")
 export class Article{
@@ -14,10 +15,14 @@ export class Article{
     @Column({type: 'text'})
     tags: string[]
 
-    constructor(slug: string, title: string, body: string, tags: string[]){
+    @ManyToOne(() => User)
+    author: User
+
+    constructor(slug: string, title: string, body: string, tags: string[], author: User){
         this.body = body,
         this.title = title,
         this.slug = slug,
-        this.tags = tags
+        this.tags = tags,
+        this.author = author
     }
 }

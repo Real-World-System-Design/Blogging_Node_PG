@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { getAllUsers, registerUsers } from '../controller/user';
+import { deleteUser, getAllUsers, registerUsers, updateUser } from '../controller/user';
 
 const route = Router();
 
@@ -15,6 +15,24 @@ route.get('/', async(req, res) => {
 route.post('/', async(req, res) => {
     try {
         const user = await registerUsers(req.body);
+        res.status(200).send(user);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+})
+
+route.patch('/:email', async(req, res) =>{
+    try {
+        const user = await updateUser(req.body, req.params.email);
+        res.status(200).send(user);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+})
+
+route.delete('/:email', async(req, res) => {
+    try {
+        const user = await deleteUser(req.params.email);
         res.status(200).send(user);
     } catch (e) {
         res.status(500).send(e);

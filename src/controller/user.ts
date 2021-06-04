@@ -7,6 +7,12 @@ interface registerData{
     email:string
 }
 
+interface updateData{
+    username: string,
+    password: string,
+    email:string
+}
+
 export async function getAllUsers(): Promise<User[]> {
     const repo = getRepository(User);
 
@@ -40,10 +46,35 @@ export async function registerUsers(data: registerData):Promise<User> {
     
 // }
 
-// export async function updateUser(): Promise<User> {
-    
-// }
+export async function updateUser(data: updateData, email: string): Promise<User> {
 
-// export async function deleteUser(): Promise<User> {
-    
-// }
+    try {
+        const repo = getRepository(User);
+
+        const user = await repo.findOne(email);
+        if(!user) throw new Error("no user found");
+
+        if(data.email) user.email = data.email;
+        if(data.username) user.username = data.username;
+        if(data.password) user.password = data.password;
+        
+        const updatedUser = await repo.save(user);
+        return updatedUser;
+    } catch (e) {
+        throw e;
+    }
+}
+
+export async function deleteUser(email: string) {
+    try {
+        const repo = getRepository(User)
+        const user = await repo.findOne(email);
+
+        if(!user) throw new Error("no user found");
+
+        const deletedUser = await repo.remove(user);
+        return deletedUser;
+    } catch (error) {
+        
+    }
+}

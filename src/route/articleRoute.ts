@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { createArticle, getAllArticles } from '../controller/article';
+import { deleteArticle, getAllArticles, updateArticle } from '../controller/article';
 
 const route = Router();
 
@@ -12,13 +12,31 @@ route.get('/', async(req, res) => {
     }
 });
 
-route.post('/', async(req, res) => {
+// route.post('/', async(req, res) => {
+//     try {
+//         const user = await createArticle(req.body);
+//         res.status(200).send(user);
+//     } catch (e) {
+//         res.status(500).send(e);
+//     }
+// })
+
+route.patch('/:slug', async(req, res) =>{
     try {
-        const user = await createArticle(req.body);
+        const user = await updateArticle(req.body, req.params.slug);
         res.status(200).send(user);
     } catch (e) {
         res.status(500).send(e);
     }
 })
 
-export const userRoutes = route;
+route.delete('/:slug', async(req, res) => {
+    try {
+        const user = await deleteArticle(req.params.slug);
+        res.status(200).send(user);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+})
+
+export const articleRoutes = route;
