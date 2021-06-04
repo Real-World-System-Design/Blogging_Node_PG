@@ -72,9 +72,8 @@ export async function deleteUser(email: string) {
 
         if(!user) throw new Error("no user found");
 
-        const deletedUser = await repo.remove(user);
-        return deletedUser;
-    } catch (error) {
-        
+        repo.delete(user);
+    } catch (e) {
+        throw e;
     }
 }

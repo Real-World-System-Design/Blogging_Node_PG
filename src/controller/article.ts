@@ -64,8 +64,7 @@ export async function deleteArticle(slug: string) {
 
         if(!article) throw new Error("No aricle with this slug exists");
         
-        const deletedArticle = await reop.remove(article);
-        return deletedArticle;
+        reop.delete(article);
     } catch (e) {
         throw e;
     }
