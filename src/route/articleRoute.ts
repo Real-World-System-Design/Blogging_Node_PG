@@ -1,11 +1,11 @@
 import {Router} from 'express';
-import { getAllUsers, registerUsers } from '../controller/user';
+import { createArticle, getAllArticles } from '../controller/article';
 
 const route = Router();
 
 route.get('/', async(req, res) => {
     try {
-        const users = await getAllUsers();
+        const users = await getAllArticles();
         res.status(200).send(users); 
     } catch (e) {
         res.status(500).send(e);
@@ -14,7 +14,7 @@ route.get('/', async(req, res) => {
 
 route.post('/', async(req, res) => {
     try {
-        const user = await registerUsers(req.body);
+        const user = await createArticle(req.body);
         res.status(200).send(user);
     } catch (e) {
         res.status(500).send(e);
