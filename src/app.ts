@@ -12,7 +12,7 @@ app.use(allRoutes);
 const PORT = process.env.PORT || 4000;
 
 app.get('/', (req, res) => {
-    res.send("Hlw server is running")
+    res.send("Testing github actions")
 });
 
 function start() {
