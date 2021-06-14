@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { Article } from "../model/Article";
 import { User } from "../model/User";
+import { sanitization } from "../Utils/security";
 import { slugify } from "../Utils/stringUtils";
 
 interface articleData{
@@ -17,32 +18,34 @@ export async function getAllArticles(): Promise<Article[]> {
     return articles;
 }
 
-
-export async function createArticle(data: articleData, email: string):Promise<Article> {
+export async function createArticle(data: articleData, email: string): Promise<Article> {
     //validation
     if(!data.body) throw new Error("body field is empty");
     if(!data.title) throw new Error("title field is empty");
     if(!data.tags) throw new Error("tags field is empty");
     
+    const repo = getRepository(Article);
+    const uRepo = getRepository(User);
     try {
-        const repo = getRepository(Article);
-        const uRepo = getRepository(User);
-    
-        const user = await uRepo.findOne(email);
+        //check if article with given title already exists
+        const exists = await repo.findOne(data.title);
+        if(exists) throw new Error(`title ${data.title} already taken`);
 
-        const article = repo.save(new Article(
+        const user = await uRepo.findOne(email);
+        if(!user) throw new Error("user does not exists");
+
+        const article = await repo.save(new Article(
             slugify(data.title),
             data.title,
             data.body,
             data.tags,
-            user!!
+            await sanitization(user)
         ));
-
         return article;
     } catch (e) {
-        throw e
-    }
-}
+        throw e;
+    };
+};
 
 export async function updateArticle(data: articleData, slug: string): Promise<Article> {
     

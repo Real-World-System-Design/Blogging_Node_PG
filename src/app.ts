@@ -1,30 +1,29 @@
 import express from 'express';
 import { createConnection } from 'typeorm';
 import { Article } from './model/Article';
+import { Comment } from './model/Comment';
 import { User } from './model/User';
 import {allRoutes} from './route/allRoutes';
 const app = express();
 
 app.use(express.json() as any);
-
 app.use(allRoutes);
+
+const PORT = process.env.PORT || 4000;
 
 app.get('/', (req, res) => {
     res.send("Hlw server is running")
 });
 
-async function start() {
-    await createConnection({
-        type: 'postgres',
-        username: 'conduit',
-        password: 'conduit',
-        database: 'conduit',
+function start() {
+        createConnection({
+        type: 'sqlite',
+        database:':memory:',
         synchronize: true,
-        entities: [User, Article],
-        dropSchema: true,
+        entities: [User, Article, Comment],
         logging: true,
         logger: 'advanced-console'
-    })
-    app.listen(3000, () => console.log(`http://localhost:3000`));
+    });
+    app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
 }
 start();

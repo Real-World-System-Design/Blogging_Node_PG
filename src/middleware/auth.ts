@@ -14,11 +14,13 @@ export async function authByToken(req: Request, res: Response, next: NextFunctio
 
     try {
         const token = authHeader[1];
-        const user = decode(token);
+        const user = await decode(token);
         if(!user) throw new Error("NO user found");
-        (req as any).user = user;
+        ;(req as any).user = user;
         return next();
     } catch (e) {
-        res.send(500).send(e);
+        res.send(500).send({
+            err: `Login Failed ${e}`
+        });
     };
 };

@@ -30,7 +30,7 @@ export async function getAllUsers(): Promise<User[]> {
 }
 
 
-export async function registerUsers(data: registerData):Promise<User | boolean> {
+export async function registerUsers(data: registerData): Promise<User> {
     //validation
     if(!data.email) throw new Error("email field is empty");
     if(!data.password) throw new Error("password field is empty");

@@ -18,11 +18,11 @@ export class Article{
     @ManyToOne(() => User)
     author: User
 
-    constructor(slug: string, title: string, body: string, tags: string[], author: User){
-        this.body = body,
-        this.title = title,
-        this.slug = slug,
-        this.tags = tags,
+    constructor(slug: string, title: string, body: string, tags: string[], author: User) {
+        this.slug = slug
+        this.title = title
+        this.body = body
+        this.tags = tags
         this.author = author
     }
 }

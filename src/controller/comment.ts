@@ -2,6 +2,7 @@ import { getRepository } from "typeorm";
 import { Article } from "../model/Article";
 import { Comment } from "../model/Comment";
 import { User } from "../model/User";
+import { sanitization } from "../Utils/security";
 
 interface commentData {
     body: string
@@ -24,7 +25,7 @@ export async function postComment(data: commentData,email: string , slug: string
 
         const comment = repo.save(new Comment(
             data.body,
-            user!!
+            await sanitization(user)
         ));
         return comment;
     } catch (e) {
