@@ -4,6 +4,18 @@ import { authByToken } from '../middleware/auth';
 
 const route = Router();
 
+/**
+ * Install redis as a docker container and run it .
+ * Then only this middleware will run .
+ * $node
+ * >(process.platform === "win32")? throw new Error("could not able execute the middleware) : "sucessfully lunched"
+ * just import this and add to the get all products route
+ * import {global_cache} from '../middleware/cache';
+ * route.get('/', global_cache, ...... remainting code)
+ * cont articles = ......;
+ * client.setex('postData', 60, JSON.stringify(articles));
+ */
+
 route.get('/', async(req, res) => {
     try {
         const articles = await getAllArticles();
