@@ -1,4 +1,4 @@
-<h1 align="center">:book:<tt>Bloggy</tt></h1>
+<h1 align="center">:book:<tt>Bloggy</tt>:book:</h1>
 
 <blockquote align="center">Blogging application for sharing your knowledge API</blockquote>
 
