@@ -6,6 +6,7 @@ const secret = process.env.JWT_SECRET;
 
 export async function sign(user: User): Promise<string>{
     return new Promise<string>((resolve, reject) => {
+        //TODO: add the token exp logic
         jwt.sign({
             username: user.username,
             email: user.email

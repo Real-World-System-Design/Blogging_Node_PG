@@ -12,8 +12,8 @@ export class Article{
     @Column({type: 'text'})
     body: string
 
-    @Column({type: 'text'})
-    tags: string[]
+    @Column({type: 'text', nullable: true})
+    tags?: string[]
 
     @ManyToOne(() => User)
     author: User

@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc",
     "prestart": "npm run build",
-    "start": "node dist/app.js"
+    "start": "node dist/app.js",
+    "test": "jest",
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -21,14 +23,19 @@
   "homepage": "https://github.com/Real-World-System-Design/Blogging_Node_PG#readme",
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.10",
+    "@types/jest": "^26.0.23",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/redis": "^2.8.29",
     "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "jest": "^27.0.6",
     "jsonwebtoken": "^8.5.1",
     "redis": "^3.1.2",
     "sqlite3": "^5.0.2",
+    "ts-jest": "^27.0.3",
     "typeorm": "^0.2.32",
     "typescript": "^4.3.2"
   },
